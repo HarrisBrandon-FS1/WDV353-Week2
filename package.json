@@ -1,5 +1,30 @@
 {
+  "name": "wdv353-week1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrisBrandon-FS1/WDV353-week1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarrisBrandon-FS1/WDV353-week1/issues"
+  },
+  "homepage": "https://github.com/HarrisBrandon-FS1/WDV353-week1#readme",
   "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jest": "^29.7.0",
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.9"
   }
 }
