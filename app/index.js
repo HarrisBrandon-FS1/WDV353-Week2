@@ -1,39 +1,12 @@
 const express = require('express');
 const app = express();
-const router=require('./routes');
-const todoHandler = require('./routes/todoRoutes');
-const middleware = require('./middleware/index');
-
-middleware(app);
-
-app.use(express.json());
+const router =require('./routes');
 
 
-
-`localhost:3000/`;
-app.get('/', (req,res) => {
-    console.log('GET');
-    res.json({ message: `Service is up!` });
+app.get("/", (req, res) => {
+    res.status(200).json({message: "API is running", success: true});
 });
 
-
-
-`localhost:3000/api`;
-app.use('/api', router);
-app.use('/todos', todoHandler);
-
-
-app.use((req,res,next)=>{
-    const error = new Error('Not Found');
-    error.status = 404;
-    next(error);
-});
-
-app.use((err, req, res, next) => {
-    //console.log('ERROR >>>', err);
-    res
-    .status(err.status || 500)
-    .json({message: err.message, status: err.status });
-});
+app.use("/api/v1", router);
 
 module.exports = app;

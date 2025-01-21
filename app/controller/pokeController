@@ -1,0 +1,47 @@
+const getAllPokes = (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: `${req.method} - request to Pokemon endpoint`,
+    });
+};
+
+const getPokeById = (req, res) => {
+    const {id} = req.params;
+    res.status(200).json({
+        id,
+        success: true,
+        message: `${req.method} - request to Pokemon endpoint`,
+    });
+};
+
+const createPoke = (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: `${req.method} - request to Pokemon endpoint`,
+    });
+};
+
+const updatePoke = (req, res) => {
+    const {id} = req.params;
+    res.status(200).json({
+        id,
+        success: true,
+        message: `${req.method} - request to Pokemon endpoint`,
+    });
+};
+const deletePoke = (req, res) => {
+    const {id} = req.params;
+    res.status(200).json({
+        id,
+        success: true,
+        message: `${req.method} - request to Pokemon endpoint`,
+    });
+};
+
+module.exports = {
+    createPoke,
+    getAllPokes,
+    getPokeById,
+    updatePoke,
+    deletePoke,
+};
