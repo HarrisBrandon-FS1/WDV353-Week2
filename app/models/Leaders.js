@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pokeSchema = new mongoose.Schema({
+const leaderSchema = new mongoose.Schema({
     name: {
         type:String,
         unique: true,
@@ -32,9 +32,10 @@ const pokeSchema = new mongoose.Schema({
             "Fairy", 
         ],
     },
-    dexNumber: {
+    gymNumber: {
         type: Number,
         required: true,
+        
     },
     description: {
         type: String,
@@ -45,4 +46,4 @@ const pokeSchema = new mongoose.Schema({
 {timestamps: true}
 );
 
-module.exports = mongoose.model('Pokemon', pokeSchema);
+module.exports = mongoose.model('Leaders', leaderSchema);

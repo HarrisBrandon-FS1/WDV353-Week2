@@ -21,12 +21,25 @@ const getPokeById = async (req, res) => {
 
 const createPoke = async (req, res) => {
     const {poke} = req.body;
-   const newPoke = await Pokes.create(poke);
+    try{
+        const newPoke = await Pokes.create(poke);
    console.log("data >>>", newPoke);
     res.status(200).json({
+        data: newPoke,
         success: true,
         message: `${req.method} - request to Pokemon endpoint`,
     });
+
+    }catch(error){
+        if(error.name == "ValidationError") {
+            console.error("Error Validating!", error);
+            res.status(422).json(error);
+        }else{
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+   
 };
 
 const updatePoke = async (req, res) => {
