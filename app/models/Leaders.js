@@ -10,7 +10,7 @@ const leaderSchema = new mongoose.Schema({
     },
     type: {
         type: [String],
-        required: true,
+        required:true,
         enum: [
             "Normal",
             "Fire",
