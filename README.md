@@ -1,1 +1,2 @@
 # WDV353-Week2
+in week 2 I added another collection of routes called Leaders. I added in a controller for both leader and pokes. The models for Leader and Pokes have been created and tested. Updating pokes dexNumber variable seems to be not working but there was no change between it and the leader one. The number seems to not be reading as a number when put into postman. every other part of the models and the routers works completely on Postman.
