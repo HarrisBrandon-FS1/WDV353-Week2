@@ -1,22 +1,45 @@
 const Leaders = require("../models/Leaders");
 
 const getAllLeaders = async (req, res) => {
+    try{
     const leaders = await Leaders.find({});
     res.status(200).json({
         data: leaders,
         success: true,
         message: `${req.method} - request to Leader endpoint`,
     });
+
+        }catch(error){
+            if(error.name == "ValidationError") {
+                console.error("Error Validating!", error);
+                res.status(422).json(error);
+            }else{
+                console.error(error);
+                res.status(500).json(error);
+            }
+        }
+
 };
 
 const getLeaderById = async (req, res) => {
     const {id} = req.params;
+    try{
     const leader = await Leaders.findById(id);
     res.status(200).json({
         data: leader,
         success: true,
         message: `${req.method} - request to Leader endpoint`,
     });
+        }catch(error){
+            if(error.name == "ValidationError") {
+                console.error("Error Validating!", error);
+                res.status(422).json(error);
+            }else{
+                console.error(error);
+                res.status(500).json(error);
+            }
+        }
+
 };
 
 const createLeader = async (req, res) => {
@@ -44,21 +67,44 @@ const createLeader = async (req, res) => {
 
 const updateLeader = async (req, res) => {
     const {id} = req.params;
+    try{
     const leader = await Leaders.findByIdAndUpdate(id, req.body, { new: true});
     res.status(200).json({
         data: leader,
         success: true,
         message: `${req.method} - request to Leader endpoint`,
-    });
+    });    
+       }catch(error){
+        if(error.name == "ValidationError") {
+            console.error("Error Validating!", error);
+            res.status(422).json(error);
+        }else{
+            console.error(error);
+            res.status(500).json(error);
+        }
+    }
+   
+
+
 };
 const deleteLeader = async (req, res) => {
     const {id} = req.params;
+    try{
     const leader = await Leaders.findByIdAndDelete(id)
     res.status(200).json({
         data: leader,
         success: true,
         message: `${req.method} - request to Leader endpoint`,
     });
+        }catch(error){
+            if(error.name == "ValidationError") {
+                console.error("Error Validating!", error);
+                res.status(422).json(error);
+            }else{
+                console.error(error);
+                res.status(500).json(error);
+            }
+        }
 };
 
 module.exports = {

@@ -1,22 +1,42 @@
 const Pokes = require("../models/Pokes");
 
 const getAllPokes = async (req, res) => {
+    try{
     const pokes = await Pokes.find({});
     res.status(200).json({
         data: pokes,
         success: true,
         message: `${req.method} - request to Pokemon endpoint`,
     });
+            }catch(error){
+                if(error.name == "ValidationError") {
+                    console.error("Error Validating!", error);
+                    res.status(422).json(error);
+                }else{
+                    console.error(error);
+                    res.status(500).json(error);
+                }
+            }
 };
 
 const getPokeById = async (req, res) => {
     const {id} = req.params;
+    try{
     const poke = await Pokes.findById(id);
     res.status(200).json({
         data: poke,
         success: true,
         message: `${req.method} - request to Pokemon endpoint`,
     });
+        }catch(error){
+            if(error.name == "ValidationError") {
+                console.error("Error Validating!", error);
+                res.status(422).json(error);
+            }else{
+                console.error(error);
+                res.status(500).json(error);
+            }
+        }
 };
 
 const createPoke = async (req, res) => {
@@ -44,21 +64,41 @@ const createPoke = async (req, res) => {
 
 const updatePoke = async (req, res) => {
     const {id} = req.params;
+    try{
     const poke = await Pokes.findByIdAndUpdate(id, req.body, { new: true});
     res.status(200).json({
         data: poke,
         success: true,
         message: `${req.method} - request to Pokemon endpoint`,
     });
+        }catch(error){
+            if(error.name == "ValidationError") {
+                console.error("Error Validating!", error);
+                res.status(422).json(error);
+            }else{
+                console.error(error);
+                res.status(500).json(error);
+            }
+        }
 };
 const deletePoke = async (req, res) => {
     const {id} = req.params;
+    try{
     const poke = await Pokes.findByIdAndDelete(id)
     res.status(200).json({
         data: poke,
         success: true,
         message: `${req.method} - request to Pokemon endpoint`,
     });
+        }catch(error){
+            if(error.name == "ValidationError") {
+                console.error("Error Validating!", error);
+                res.status(422).json(error);
+            }else{
+                console.error(error);
+                res.status(500).json(error);
+            }
+        }
 };
 
 module.exports = {
