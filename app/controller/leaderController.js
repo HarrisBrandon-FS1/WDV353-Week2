@@ -1,6 +1,12 @@
 const Leaders = require("../models/Leaders");
 
 const getAllLeaders = async (req, res) => {
+    console.log(">>>",req.query);
+
+   let querString = JSON.stringify(req.query);
+
+    querString = querString.replace(/\b(gt|gte|lt|lte)\b/g.match => (`$${match}`);
+
     try{
     const leaders = await Leaders.find({});
     res.status(200).json({
