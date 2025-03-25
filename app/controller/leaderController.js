@@ -3,17 +3,42 @@ const Leaders = require("../models/Leaders");
 const getAllLeaders = async (req, res) => {
     console.log(">>>",req.query);
 
-   let querString = JSON.stringify(req.query);
+    let querString = JSON.stringify(req.query);
+    
+        querString = querString.replace(
+            /\b(gt|gte|lt|lte)\b/g,
+             (match) => `$${match}`)
+   
+             let query = Leaders.find(JSON.parse(querString));
+   
+           if(req.query.select) {
+               const fields = req.query.select.split(",").join(" ");
+               query = Leaders.find({}).select(fields);
+           }
+   
+           if(req.query.sort) {
+               const sortBy = req.query.sort.split(",").join(" ");
+               query = Leaders.find({}).sort(sortBy);
+           };
 
-    querString = querString.replace(/\b(gt|gte|lt|lte)\b/g.match => (`$${match}`);
+
+            query = Pokes.find({});
+                   const page = parseInt(req.query.page) || 1;
+                   const limit = parseInt(req.query.limit) || 2;
+                   const skip = (page - 1) * limit;
+           
+                   query.skip(skip).limit(limit);
+           
+
 
     try{
-    const leaders = await Leaders.find({});
+    const leaders = await Leaders.find(JSON.parse(querString));
     res.status(200).json({
         data: leaders,
         success: true,
         message: `${req.method} - request to Leader endpoint`,
     });
+    
 
         }catch(error){
             if(error.name == "ValidationError") {

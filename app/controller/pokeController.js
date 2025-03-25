@@ -1,8 +1,39 @@
+const Leaders = require("../models/Leaders");
 const Pokes = require("../models/Pokes");
 
 const getAllPokes = async (req, res) => {
+
+    console.log(">>>",req.query);
+
+    let querString = JSON.stringify(req.query);
+ 
+     querString = querString.replace(
+         /\b(gt|gte|lt|lte)\b/g,
+          (match) => `$${match}`)
+
+          let query = Pokes.find(JSON.parse(querString));
+
+        if(req.query.select) {
+            const fields = req.query.select.split(",").join(" ");
+            query = Pokes.find({}).select(fields);
+        }
+
+        if(req.query.sort) {
+            const sortBy = req.query.sort.split(",").join(" ");
+            query = Pokes.find({}).sort(sortBy);
+        }
+
+
+        query = Pokes.find({});
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 2;
+        const skip = (page - 1) * limit;
+
+        query.skip(skip).limit(limit);
+
+
     try{
-    const pokes = await Pokes.find({});
+    const pokes = await Pokes.find(JSON.parse(querString));
     res.status(200).json({
         data: pokes,
         success: true,
